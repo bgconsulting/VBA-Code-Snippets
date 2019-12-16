@@ -1,0 +1,31 @@
+Sub emailauto()
+
+'Declare variables
+
+	Dim OLApp As Outlook.Application
+	Dim OLMail As Object
+	
+'Open Outlook to start a new email
+
+	Set OLApp = New Outlook.Application
+	Set OLMail = OLApp.CreateItem(0)
+	OLApp.Session.Logon
+	
+'Create mail and send
+
+	With OLMail
+	.To = "email@sample.com"
+	.CC = ""
+	.BCC = ""
+	.Subject = "Enter your subject here"
+	.Body = "Enter what you want displayed in body of email"
+	.Attachments.Add ActiveWorkbook.FullName
+	.Send 'Could also use .Display to show email before sending
+	End With
+	
+'Memory Cleanup
+
+	Set OLMail = Nothing
+	Set OLApp = Nothing
+	
+End Sub
